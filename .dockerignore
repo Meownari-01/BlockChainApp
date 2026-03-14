@@ -1,0 +1,10 @@
+node_modules/
+.expo/
+dist/
+build/
+android/
+ios/
+.git/
+*.log
+.env
+*firebase-adminsdk*.json
