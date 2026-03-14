@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "586515534817",
+    "project_id": "techmeow-44f21",
+    "storage_bucket": "techmeow-44f21.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586515534817:android:34e7c7ebe61c5b1e1178a0",
+        "android_client_info": {
+          "package_name": "com.techmeow.chaindelivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlUdEmLdM4WPk-8JQx1-42yEWnileLCtA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

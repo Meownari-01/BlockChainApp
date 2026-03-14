@@ -1,0 +1,83 @@
+{
+    "expo": {
+        "name": "ChainDeliver",
+        "slug": "chaindeliver",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/images/icon.png",
+        "scheme": "chaindeliver",
+        "userInterfaceStyle": "dark",
+        "splash": {
+            "image": "./assets/images/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#0A0E1A"
+        },
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "supportsTablet": false,
+            "bundleIdentifier": "com.chaindeliver.pod",
+            "infoPlist": {
+                "NSCameraUsageDescription": "ChainDeliver needs camera access to capture delivery proof photos.",
+                "NSLocationWhenInUseUsageDescription": "ChainDeliver needs location access to record delivery GPS coordinates.",
+                "NSLocationAlwaysAndWhenInUseUsageDescription": "ChainDeliver needs location access to record delivery GPS coordinates.",
+                "NSPhotoLibraryUsageDescription": "ChainDeliver needs photo library access to select delivery proof images."
+            }
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/images/adaptive-icon.png",
+                "backgroundColor": "#0A0E1A"
+            },
+            "package": "com.chaindeliver.pod",
+            "permissions": [
+                "CAMERA",
+                "RECORD_AUDIO",
+                "ACCESS_FINE_LOCATION",
+                "ACCESS_COARSE_LOCATION",
+                "READ_EXTERNAL_STORAGE",
+                "WRITE_EXTERNAL_STORAGE",
+                "INTERNET",
+                "ACCESS_NETWORK_STATE"
+            ]
+        },
+        "web": {
+            "favicon": "./assets/images/favicon.png",
+            "bundler": "metro"
+        },
+        "plugins": [
+            "expo-router",
+            "expo-secure-store",
+            [
+                "expo-camera",
+                {
+                    "cameraPermission": "ChainDeliver needs camera to capture delivery proof photos."
+                }
+            ],
+            [
+                "expo-location",
+                {
+                    "locationAlwaysAndWhenInUsePermission": "ChainDeliver needs location to record delivery GPS coordinates."
+                }
+            ],
+            [
+                "expo-barcode-scanner",
+                {
+                    "cameraPermission": "ChainDeliver needs camera to scan shipment QR codes."
+                }
+            ]
+        ],
+        "experiments": {
+            "typedRoutes": true
+        },
+        "extra": {
+            "router": {
+                "origin": false
+            },
+            "eas": {
+                "projectId": "your-eas-project-id"
+            }
+        }
+    }
+}

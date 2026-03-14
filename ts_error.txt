@@ -1,0 +1,2 @@
+src/services/hooks/useAuth.ts(6,10): error TS7034: Variable 'auth' implicitly has type 'any' in some locations where its type cannot be determined.
+src/services/hooks/useAuth.ts(40,48): error TS7005: Variable 'auth' implicitly has an 'any' type.
