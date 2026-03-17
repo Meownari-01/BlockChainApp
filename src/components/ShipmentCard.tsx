@@ -13,6 +13,8 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Typography, Spacing, BorderRadius, Shadows } from '../constants/theme';
 import { ShipmentMetadata, ShipmentStatus } from '../types';
+import * as Clipboard from 'expo-clipboard';
+import { useRouter } from 'expo-router';
 
 interface ShipmentCardProps {
     shipment: ShipmentMetadata;
@@ -73,6 +75,22 @@ export const ShipmentCard: React.FC<ShipmentCardProps> = React.memo(({
 }) => {
     const status = shipment.status as ShipmentStatus;
     const cfg = STATUS_CONFIG[status] ?? STATUS_CONFIG.Created;
+    const router = useRouter();
+
+    const handleCopyId = () => {
+        if (!shipment.shipmentId) return;
+        Clipboard.setStringAsync(shipment.shipmentId);
+        if (Platform.OS === 'web') {
+            window.alert('Shipment ID copied to clipboard');
+        } else {
+            Alert.alert('Copied', 'Shipment ID copied to clipboard');
+        }
+    };
+
+    const handleTrack = () => {
+        if (!shipment.shipmentId && !shipment.orderId) return;
+        router.push(`/(public)/status/${shipment.shipmentId || shipment.orderId}` as never);
+    };
 
     return (
         <TouchableOpacity
@@ -86,8 +104,28 @@ export const ShipmentCard: React.FC<ShipmentCardProps> = React.memo(({
                     <Ionicons name="cube-outline" size={16} color={Colors.primary} />
                     <Text style={styles.orderId} numberOfLines={1}>{shipment.orderId}</Text>
                 </View>
-                {/* Full Shipment ID */}
-                <Text style={styles.shipmentId} numberOfLines={1}>{shipment.shipmentId}</Text>
+                {/* Full Shipment ID & Actions */}
+                <View style={styles.shipmentIdContainer}>
+                    <Text style={styles.shipmentId} numberOfLines={1}>
+                        {truncate(shipment.shipmentId || '', 12)}
+                    </Text>
+                    <View style={styles.shipmentIdActions}>
+                        <TouchableOpacity 
+                            onPress={handleCopyId} 
+                            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                            style={styles.actionIconButton}
+                        >
+                            <Ionicons name="copy-outline" size={14} color={Colors.textMuted} />
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={handleTrack} 
+                            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                            style={styles.actionIconButton}
+                        >
+                            <Ionicons name="navigate-outline" size={14} color={Colors.primary} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
                 {/* Status badge */}
                 <View style={[styles.badge, { backgroundColor: cfg.bg, borderColor: cfg.border }]}>
                     <Ionicons name={cfg.icon as keyof typeof Ionicons.glyphMap} size={12} color={cfg.text} />
@@ -164,14 +202,27 @@ const styles = StyleSheet.create({
         ...Typography.h4,
         fontSize: 15,
     },
+    shipmentIdContainer: {
+        position: 'absolute',
+        top: 40,
+        left: Spacing.md,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+    },
     shipmentId: {
         ...Typography.caption,
-        fontSize: 10,
+        fontSize: 11,
         color: Colors.textMuted,
         fontFamily: 'monospace',
-        position: 'absolute',
-        top: 36,
-        left: Spacing.md,
+    },
+    shipmentIdActions: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
+    },
+    actionIconButton: {
+        padding: 4,
     },
     badge: {
         flexDirection: 'row',

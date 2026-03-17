@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+firebase-admin
+web3
+python-dotenv
+faker
+qrcode
+Pillow

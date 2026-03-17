@@ -284,6 +284,13 @@ export default function AdminDashboard() {
                             )}
                         </LinearGradient>
                     </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.actionBtn} onPress={() => router.push('/(agent)/dashboard' as never)}>
+                        <LinearGradient colors={['#10B98120', '#10B98105']} style={styles.actionGrad}>
+                            <Ionicons name="bicycle" size={26} color="#10B981" />
+                            <Text style={[styles.actionLabel, { color: '#10B981' }]}>My{'\n'}Deliveries</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 </View>
 
                 {/* Graphical Analytics */}
@@ -421,10 +428,11 @@ const styles = StyleSheet.create({
     },
     actionsRow: {
         flexDirection: 'row',
+        flexWrap: 'wrap',
         gap: Spacing.sm,
     },
     actionBtn: {
-        flex: 1,
+        width: '31%',
         borderRadius: BorderRadius.md,
         overflow: 'hidden',
         borderWidth: 1,
